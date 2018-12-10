@@ -1,0 +1,35 @@
+{
+    "name": "corex/debug",
+    "type": "library",
+    "description": "Various helpers for debugging code.",
+    "license": "MIT",
+    "keywords": [
+        "debug"
+    ],
+    "authors": [
+        {
+            "name": "CoRex",
+            "email": "dev@corex.dk"
+        }
+    ],
+    "require": {
+        "php": "^7.2",
+        "symfony/var-dumper": "^4.2"
+    },
+    "require-dev": {
+        "phpunit/phpunit": "^7.5"
+    },
+    "autoload": {
+        "psr-4": {
+            "CoRex\\Debug\\": "src/"
+        },
+        "files": [
+            "src/functions.php"
+        ]
+    },
+    "autoload-dev": {
+        "psr-4": {
+            "Tests\\CoRex\\Debug\\": "tests"
+        }
+    }
+}
