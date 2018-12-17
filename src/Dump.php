@@ -97,9 +97,9 @@ class Dump
         foreach ($this->values as $value) {
             $this->renderer = new $class($value, $this->function, $uses);
             $this->renderer->display();
-            $uses = $this->renderer->getUses();
-            if ($uses !== null) {
-                dump($uses);
+            $renderedUses = $this->renderer->getUses();
+            if ($renderedUses !== null) {
+                dump($renderedUses);
             }
         }
     }
