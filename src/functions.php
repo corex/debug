@@ -5,8 +5,6 @@ declare(strict_types=1);
 if (!function_exists('d')) {
     /**
      * Dump.
-     *
-     * @throws Exception
      */
     function d(): void
     {
@@ -17,8 +15,6 @@ if (!function_exists('d')) {
 if (!function_exists('d_show_uses')) {
     /**
      * Show debug uses.
-     *
-     * @throws Exception
      */
     function d_show_uses(): void
     {

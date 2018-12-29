@@ -11,8 +11,6 @@ class FunctionsTest extends TestCase
 {
     /**
      * Test d().
-     *
-     * @throws \Exception
      */
     public function testD(): void
     {
@@ -36,8 +34,6 @@ class FunctionsTest extends TestCase
 
     /**
      * Test d_show_uses().
-     *
-     * @throws \Exception
      */
     public function testDShowUses(): void
     {

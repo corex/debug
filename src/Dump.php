@@ -70,8 +70,6 @@ class Dump
 
     /**
      * Value.
-     *
-     * @throws \Exception
      */
     public function value(): void
     {
@@ -82,7 +80,6 @@ class Dump
      * Execute.
      *
      * @param string $class
-     * @throws \Exception
      */
     private function execute(string $class): void
     {

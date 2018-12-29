@@ -12,8 +12,6 @@ class ValueBaseTest extends TestCase
 {
     /**
      * Test.
-     *
-     * @throws \Exception
      */
     public function testConstructor(): void
     {
