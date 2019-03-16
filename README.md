@@ -1,7 +1,10 @@
 # Debug functions.
 Various helpers for debugging code.
 
-**_Versioning for this package follows http://semver.org/. Backwards compatibility might break on upgrade to major versions._**
+![License](https://img.shields.io/packagist/l/corex/debug.svg)
+![Build Status](https://travis-ci.org/corex/debug.svg?branch=master)
+![codecov](https://codecov.io/gh/corex/debug/branch/master/graph/badge.svg)
+
 
 ```php
 // Dump value.
