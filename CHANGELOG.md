@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.0.3
+
+### Fixed
+- Reached 100% Code Coverage.
+
 ## 1.0.2
 
 ### Fixed
