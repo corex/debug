@@ -14,6 +14,8 @@ class FunctionsTest extends TestCase
      */
     public function testD(): void
     {
+        Dump::showUses(false);
+
         // Check user defined function.
         $this->assertTrue(in_array('d', $this->getUserDefinedFunctions()));
 
@@ -40,7 +42,21 @@ class FunctionsTest extends TestCase
         Dump::showUses(false);
         $this->assertFalse(Dump::isUsesVisible());
         d_show_uses();
+
+        // Set custom var dumper handler to catch output.
+        VarDumperHandler::enable();
+
+        // Dump random value.
+        d('testing');
+
+        // Reset var dumper handler.
+        VarDumperHandler::disable();
+
+        $output = 'd(value) in [' . __FILE__ . ':50]';
+        $this->assertEquals($output, VarDumperHandler::value());
+
         $this->assertTrue(Dump::isUsesVisible());
+        Dump::showUses(false);
     }
 
     /**
