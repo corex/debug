@@ -6,9 +6,14 @@ namespace CoRex\Debug;
 
 use CoRex\Debug\Base\ValueBase;
 use CoRex\Debug\Renderers\Value;
+use Symfony\Component\VarDumper\Cloner\VarCloner;
+use Symfony\Component\VarDumper\Dumper\ServerDumper;
+use Symfony\Component\VarDumper\VarDumper;
 
 class Dump
 {
+    public const DUMP_SERVER_INITIALIZE = 'DUMP-SERVER-INITIALIZE';
+
     /** @var ValueBase */
     private $renderer;
 
@@ -66,6 +71,31 @@ class Dump
     public static function isCLI(): bool
     {
         return PHP_SAPI === 'cli';
+    }
+
+    /**
+     * Setup remote server handler.
+     */
+    public static function initializeRemoteServerHandler(): void
+    {
+        if (!self::isRemoteServerHandlerInitialized()) {
+            VarDumper::setHandler(function ($var) {
+                $cloner = new VarCloner();
+                $dumper = new ServerDumper('tcp://' . Constants::HOST_PORT);
+                $dumper->dump($cloner->cloneVar($var));
+            });
+            define(self::DUMP_SERVER_INITIALIZE, true);
+        }
+    }
+
+    /**
+     * Is remote server handler initialized.
+     *
+     * @return bool
+     */
+    public static function isRemoteServerHandlerInitialized(): bool
+    {
+        return defined(self::DUMP_SERVER_INITIALIZE);
     }
 
     /**

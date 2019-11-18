@@ -2,3 +2,6 @@
 vendor/
 composer.lock
 /log
+
+#phpunit
+/.phpunit.result.cache

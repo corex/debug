@@ -1,5 +1,10 @@
 # Changelog
 
+## 1.1.0
+
+### Added
+- Added function ds() to dump only to remote server.
+
 ## 1.0.3
 
 ### Fixed
