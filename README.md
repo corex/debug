@@ -5,6 +5,9 @@ Various helpers for debugging code.
 ![Build Status](https://travis-ci.org/corex/debug.svg?branch=master)
 ![codecov](https://codecov.io/gh/corex/debug/branch/master/graph/badge.svg)
 
+This package is a simple approach for debug'ing code when developing. It is based on the excellent var-dumper package from Symfony.
+
+It is a valuable tool when debug'ing old codebases, especially since it also can use [Symfony Dump Server](https://symfony.com/doc/current/components/var_dumper.html#the-dump-server).
 
 ## Functions
 
