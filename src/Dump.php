@@ -4,7 +4,13 @@ declare(strict_types=1);
 
 namespace CoRex\Debug;
 
-use CoRex\Debug\Base\ValueBase;
+use CoRex\Debug\Base\BaseValue;
+use CoRex\Debug\Renderers\Constants as ConstantsRenderer;
+use CoRex\Debug\Renderers\Extend;
+use CoRex\Debug\Renderers\Interfaces;
+use CoRex\Debug\Renderers\Json;
+use CoRex\Debug\Renderers\Keys;
+use CoRex\Debug\Renderers\Methods;
 use CoRex\Debug\Renderers\Value;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\ServerDumper;
@@ -12,9 +18,10 @@ use Symfony\Component\VarDumper\VarDumper;
 
 class Dump
 {
-    public const DUMP_SERVER_INITIALIZE = 'DUMP-SERVER-INITIALIZE';
+    /** @var bool */
+    private static $dumpServerEnabled = false;
 
-    /** @var ValueBase */
+    /** @var BaseValue */
     private $renderer;
 
     /** @var mixed */
@@ -76,42 +83,131 @@ class Dump
     /**
      * Setup remote server handler.
      */
-    public static function initializeRemoteServerHandler(): void
+    public static function enableRemoteServerHandler(): void
     {
-        if (!self::isRemoteServerHandlerInitialized()) {
-            VarDumper::setHandler(function ($var) {
-                $cloner = new VarCloner();
-                $dumper = new ServerDumper('tcp://' . Constants::HOST_PORT);
-                $dumper->dump($cloner->cloneVar($var));
-            });
-            define(self::DUMP_SERVER_INITIALIZE, true);
-        }
+        VarDumper::setHandler(function ($var): void {
+            $cloner = new VarCloner();
+            $dumper = new ServerDumper('tcp://' . Constants::HOST_PORT);
+            $dumper->dump($cloner->cloneVar($var));
+        });
+
+        self::$dumpServerEnabled = true;
     }
 
     /**
-     * Is remote server handler initialized.
+     * Reset remote server handler.
+     */
+    public static function disableRemoteServerHandler(): void
+    {
+        VarDumper::setHandler(null);
+
+        self::$dumpServerEnabled = false;
+    }
+
+    /**
+     * Is remote server handler enabled.
      *
      * @return bool
      */
-    public static function isRemoteServerHandlerInitialized(): bool
+    public static function isRemoteServerHandlerEnabled(): bool
     {
-        return defined(self::DUMP_SERVER_INITIALIZE);
+        return self::$dumpServerEnabled;
     }
 
     /**
      * Value.
+     *
+     * @return $this
      */
-    public function value(): void
+    public function value(): self
     {
         $this->execute(Value::class);
+
+        return $this;
+    }
+
+    /**
+     * Keys.
+     *
+     * @return $this
+     */
+    public function keys(): self
+    {
+        $this->execute(Keys::class);
+
+        return $this;
+    }
+
+    /**
+     * Json.
+     *
+     * @return $this
+     */
+    public function json(): self
+    {
+        $this->execute(Json::class);
+
+        return $this;
+    }
+
+    /**
+     * Constants.
+     *
+     * @return $this
+     */
+    public function constants(): self
+    {
+        $this->execute(ConstantsRenderer::class);
+
+        return $this;
+    }
+
+    /**
+     * Methods.
+     *
+     * @param bool $flattened
+     * @return $this
+     */
+    public function methods(bool $flattened = true): self
+    {
+        $this->execute(Methods::class, [
+            'flattened' => $flattened
+        ]);
+
+        return $this;
+    }
+
+    /**
+     * Interfaces.
+     *
+     * @return $this
+     */
+    public function interfaces(): self
+    {
+        $this->execute(Interfaces::class);
+
+        return $this;
+    }
+
+    /**
+     * Extend(s).
+     *
+     * @return $this
+     */
+    public function extend(): self
+    {
+        $this->execute(Extend::class);
+
+        return $this;
     }
 
     /**
      * Execute.
      *
      * @param string $class
+     * @param mixed[] $classParameters
      */
-    private function execute(string $class): void
+    private function execute(string $class, array $classParameters = []): void
     {
         // Get uses.
         $uses = $this->uses;
@@ -122,7 +218,7 @@ class Dump
 
         // Execute renderer.
         foreach ($this->values as $value) {
-            $this->renderer = new $class($value, $this->function, $uses);
+            $this->renderer = new $class($value, $this->function, $uses, $classParameters);
             $this->renderer->display();
             $renderedUses = $this->renderer->getUses();
             if ($renderedUses !== null) {

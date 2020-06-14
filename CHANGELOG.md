@@ -1,5 +1,19 @@
 # Changelog
 
+## 2.0.0
+
+### Added
+- Added helper function dv() to dump value(s) and return builder.
+- Added helper function dse() to enable remote server dumper handler.
+- Added helper dsd() to disable remote server dumper handler.
+- Added helper dsv() to dump value(s) to server only and return builder.
+- Added renderer "json" to show json for an array.
+- Added renderer "keys" to show keys for an array.
+- Added renderer "constants" to show constants for an object or a class.
+- Added renderer "extend" to show class extends for an object or a class.
+- Added renderer "interfaces" to show interfaces for an object or a class.
+- Added renderer "methods" to show methods for an object or a class.
+
 ## 1.1.0
 
 ### Added

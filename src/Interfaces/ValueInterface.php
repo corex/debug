@@ -2,7 +2,7 @@
 
 declare(strict_types=1);
 
-namespace CoRex\Debug\Base;
+namespace CoRex\Debug\Interfaces;
 
 interface ValueInterface
 {

@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace Tests\CoRex\Debug\HelperClasses;
 
-use CoRex\Debug\Base\ValueBase;
+use CoRex\Debug\Base\BaseValue;
 
-class ValueHelperBase extends ValueBase
+class HelperBaseValue extends BaseValue
 {
     /**
      * Display.

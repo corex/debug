@@ -4,9 +4,9 @@ declare(strict_types=1);
 
 namespace CoRex\Debug\Renderers;
 
-use CoRex\Debug\Base\ValueBase;
+use CoRex\Debug\Base\BaseValue;
 
-class Value extends ValueBase
+class Value extends BaseValue
 {
     /**
      * Display.
