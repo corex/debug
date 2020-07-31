@@ -23,7 +23,7 @@ class BaseValueTest extends TestCase
         $valueHelperBase = new HelperBaseValue('test', 'function.1', $uses);
         d_show_uses();
         $checkUses = $valueHelperBase->getUses();
-        $this->assertEquals('function.1(value)->function.2() in [file:line]', $checkUses);
+        $this->assertSame('function.1(value)->function.2() in [file:line]', $checkUses);
         Dump::showUses(false);
     }
 

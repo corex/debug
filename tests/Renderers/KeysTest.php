@@ -26,7 +26,7 @@ class KeysTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(array_keys($array), VarDumperHandler::value());
+        $this->assertSame(array_keys($array), VarDumperHandler::value());
     }
 
     /**
@@ -40,6 +40,6 @@ class KeysTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(Keys::MESSAGE, VarDumperHandler::value());
+        $this->assertSame(Keys::MESSAGE, VarDumperHandler::value());
     }
 }

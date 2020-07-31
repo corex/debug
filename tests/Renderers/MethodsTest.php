@@ -13,7 +13,7 @@ use Tests\CoRex\Debug\VarDumperHandler;
 class MethodsTest extends TestCase
 {
     /**
-     * Test display flattened
+     * Test display flattened.
      */
     public function testDisplayFlattened(): void
     {
@@ -36,7 +36,7 @@ class MethodsTest extends TestCase
             'methodTestD_2'
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
     }
 
     /**
@@ -70,7 +70,7 @@ class MethodsTest extends TestCase
             '- methodTestA_2',
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
     }
 
     /**
@@ -88,6 +88,6 @@ class MethodsTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(Methods::MESSAGE, VarDumperHandler::value());
+        $this->assertSame(Methods::MESSAGE_BOTH, VarDumperHandler::value());
     }
 }

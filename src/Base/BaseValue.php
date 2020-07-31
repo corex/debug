@@ -78,7 +78,7 @@ abstract class BaseValue implements ValueInterface
     /**
      * Get parameters.
      *
-     * @return array|mixed[]
+     * @return mixed[]
      */
     public function getParameters(): array
     {

@@ -80,6 +80,8 @@ When receiving a builder from i.e. dv(), it is possible to chain renderers i.e. 
 - extend() - Show class extends for an object or a class.
 - interfaces() - Show interfaces for an object or a class.
 - methods() - Show methods for an object or a class.
+- md5() - Show md5 sum.
+- objectHash() - Show object hash (spl_object_hash) for an object.
 
 To start remote server, start "vendor/bin/var-dump-server".
 
@@ -88,4 +90,4 @@ You can read more at [Symfony Dump Server](https://symfony.com/doc/current/compo
 - If you use ds() and remote server is not started, nothing will be dumped
 either for cli or html.
 - First time ds() is called, it initializes the VarDumper handler to ServerDumper.
-All dump(), d(), .... will dump to remote dump-server. 
+All dump(), d(), .... will in future dump to remote dump-server. 

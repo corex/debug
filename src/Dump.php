@@ -10,7 +10,9 @@ use CoRex\Debug\Renderers\Extend;
 use CoRex\Debug\Renderers\Interfaces;
 use CoRex\Debug\Renderers\Json;
 use CoRex\Debug\Renderers\Keys;
+use CoRex\Debug\Renderers\MD5;
 use CoRex\Debug\Renderers\Methods;
+use CoRex\Debug\Renderers\ObjectHash;
 use CoRex\Debug\Renderers\Value;
 use Symfony\Component\VarDumper\Cloner\VarCloner;
 use Symfony\Component\VarDumper\Dumper\ServerDumper;
@@ -197,6 +199,30 @@ class Dump
     public function extend(): self
     {
         $this->execute(Extend::class);
+
+        return $this;
+    }
+
+    /**
+     * MD5.
+     *
+     * @return $this
+     */
+    public function md5(): self
+    {
+        $this->execute(MD5::class);
+
+        return $this;
+    }
+
+    /**
+     * Object hash.
+     *
+     * @return $this
+     */
+    public function objectHash(): self
+    {
+        $this->execute(ObjectHash::class);
 
         return $this;
     }

@@ -27,7 +27,7 @@ class JsonTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(json_encode($array, Json::JSON_OPTIONS), VarDumperHandler::value());
+        $this->assertSame(json_encode($array, Json::JSON_OPTIONS), VarDumperHandler::value());
     }
 
     /**
@@ -41,6 +41,6 @@ class JsonTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(Keys::MESSAGE, VarDumperHandler::value());
+        $this->assertSame(Keys::MESSAGE, VarDumperHandler::value());
     }
 }

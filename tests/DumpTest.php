@@ -8,6 +8,7 @@ use CoRex\Debug\Dump;
 use CoRex\Debug\Renderers\Json;
 use PHPUnit\Framework\TestCase;
 use Symfony\Component\VarDumper\VarDumper;
+use Tests\CoRex\Debug\HelperClasses\TestA;
 use Tests\CoRex\Debug\HelperClasses\TestD;
 
 class DumpTest extends TestCase
@@ -54,7 +55,7 @@ class DumpTest extends TestCase
      */
     public function testValue(): void
     {
-        $randomString = md5((string)mt_rand(1, 100000));
+        $randomString = md5((string)random_int(1, 100000));
 
         VarDumperHandler::enable();
 
@@ -81,7 +82,7 @@ class DumpTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(array_keys($array), VarDumperHandler::value());
+        $this->assertSame(array_keys($array), VarDumperHandler::value());
     }
 
     /**
@@ -100,7 +101,7 @@ class DumpTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(json_encode($array, Json::JSON_OPTIONS), VarDumperHandler::value());
+        $this->assertSame(json_encode($array, Json::JSON_OPTIONS), VarDumperHandler::value());
     }
 
     /**
@@ -121,7 +122,7 @@ class DumpTest extends TestCase
             'CONST_A_PUBLIC'
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
     }
 
     /**
@@ -146,7 +147,7 @@ class DumpTest extends TestCase
             'methodTestD_2'
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
     }
 
     /**
@@ -178,7 +179,7 @@ class DumpTest extends TestCase
             '- methodTestA_2',
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
     }
 
     /**
@@ -199,7 +200,7 @@ class DumpTest extends TestCase
             'Tests\CoRex\Debug\HelperClasses\TestDInterface'
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
     }
 
     /**
@@ -219,6 +220,39 @@ class DumpTest extends TestCase
             'Tests\CoRex\Debug\HelperClasses\TestA'
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
+    }
+
+    /**
+     * Test md5.
+     */
+    public function testMD5(): void
+    {
+        VarDumperHandler::enable();
+
+        $randomString = md5((string)random_int(1, 100000));
+
+        (new Dump([$randomString], 'test', []))->md5();
+
+        VarDumperHandler::disable();
+        $this->assertSame(md5($randomString), VarDumperHandler::value());
+    }
+
+    /**
+     * Test object hash.
+     */
+    public function testObjectHash(): void
+    {
+        VarDumperHandler::enable();
+
+        $testA = new TestA();
+
+        (new Dump([$testA], 'test', []))->objectHash();
+
+        VarDumperHandler::disable();
+        $this->assertSame(
+            spl_object_hash($testA) . ' -> ' . TestA::class,
+            VarDumperHandler::value()
+        );
     }
 }

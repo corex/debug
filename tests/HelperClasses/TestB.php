@@ -10,6 +10,19 @@ class TestB extends TestA implements TestBInterface
     protected const CONST_B_PROTECTED = 'const.b.protected';
     private const CONST_B_PRIVATE = 'const.b.private';
 
-    public function methodTestB_1() {}
-    public function methodTestB_2() {}
+    /**
+     * Method test b_1.
+     */
+    public function methodTestB_1(): string
+    {
+        return self::CONST_B_PUBLIC;
+    }
+
+    /**
+     * Method test b_2.
+     */
+    public function methodTestB_2(): string
+    {
+        return self::CONST_B_PRIVATE;
+    }
 }

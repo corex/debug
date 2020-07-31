@@ -1,5 +1,11 @@
 # Changelog
 
+## 2.1.0
+
+### Added
+- Added renderer "md5" to show md5 sums.
+- Added renderer "objectHash" to show object hash (spl_object_hash) for an object.
+
 ## 2.0.0
 
 ### Added

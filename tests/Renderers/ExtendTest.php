@@ -28,7 +28,7 @@ class ExtendTest extends TestCase
             'Tests\CoRex\Debug\HelperClasses\TestA'
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
     }
 
     /**
@@ -42,6 +42,6 @@ class ExtendTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(Extend::MESSAGE, VarDumperHandler::value());
+        $this->assertSame(Extend::MESSAGE_BOTH, VarDumperHandler::value());
     }
 }

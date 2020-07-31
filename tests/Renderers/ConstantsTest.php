@@ -29,7 +29,7 @@ class ConstantsTest extends TestCase
             'CONST_A_PUBLIC'
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
     }
 
     /**
@@ -43,6 +43,6 @@ class ConstantsTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(Constants::MESSAGE, VarDumperHandler::value());
+        $this->assertSame(Constants::MESSAGE_BOTH, VarDumperHandler::value());
     }
 }

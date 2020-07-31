@@ -4,11 +4,11 @@ declare(strict_types=1);
 
 namespace Tests\CoRex\Debug\Renderers;
 
-use CoRex\Debug\Renderers\Value;
+use CoRex\Debug\Renderers\MD5;
 use PHPUnit\Framework\TestCase;
 use Tests\CoRex\Debug\VarDumperHandler;
 
-class ValueTest extends TestCase
+class MD5Test extends TestCase
 {
     /**
      * Test display.
@@ -17,10 +17,12 @@ class ValueTest extends TestCase
     {
         VarDumperHandler::enable();
 
-        $value = new Value('test', 'test');
+        $randomString = md5((string)random_int(1, 100000));
+
+        $value = new MD5($randomString, 'test');
         $value->display();
 
         VarDumperHandler::disable();
-        $this->assertSame('test', VarDumperHandler::value());
+        $this->assertSame(md5($randomString), VarDumperHandler::value());
     }
 }

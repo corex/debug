@@ -30,7 +30,7 @@ class FunctionsTest extends TestCase
         VarDumperHandler::disable();
 
         $output = 'd(value) in [' . __FILE__ . ':27]';
-        $this->assertEquals($output, VarDumperHandler::value());
+        $this->assertSame($output, VarDumperHandler::value());
 
         $this->assertTrue(Dump::isUsesVisible());
         Dump::showUses(false);
@@ -44,9 +44,9 @@ class FunctionsTest extends TestCase
         Dump::showUses(false);
 
         // Check user defined function.
-        $this->assertTrue(in_array('d', $this->getUserDefinedFunctions()));
+        $this->assertTrue(in_array('d', $this->getUserDefinedFunctions(), true));
 
-        $randomValue = md5((string)mt_rand(1, 100000));
+        $randomValue = md5((string)random_int(1, 100000));
 
         // Set custom var dumper handler to catch output.
         VarDumperHandler::enable();
@@ -57,7 +57,7 @@ class FunctionsTest extends TestCase
         // Reset var dumper handler.
         VarDumperHandler::disable();
 
-        $this->assertEquals($randomValue, VarDumperHandler::value());
+        $this->assertSame($randomValue, VarDumperHandler::value());
     }
 
     /**
@@ -71,7 +71,7 @@ class FunctionsTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals('testing', VarDumperHandler::value());
+        $this->assertSame('testing', VarDumperHandler::value());
     }
 
     /**

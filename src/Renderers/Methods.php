@@ -28,7 +28,7 @@ class Methods extends BaseObject
         $methods = $reflectionClass->getMethods();
         foreach ($methods as $method) {
             $declaringClass = $method->getDeclaringClass()->getName();
-            if (!in_array($declaringClass, $addedClasses)) {
+            if (!in_array($declaringClass, $addedClasses, true)) {
                 if (!$flattened && count($result) > 0) {
                     $result[] = '';
                 }

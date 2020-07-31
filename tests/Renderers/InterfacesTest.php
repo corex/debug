@@ -29,7 +29,7 @@ class InterfacesTest extends TestCase
             'Tests\CoRex\Debug\HelperClasses\TestDInterface'
         ];
 
-        $this->assertEquals($check, VarDumperHandler::value());
+        $this->assertSame($check, VarDumperHandler::value());
     }
 
     /**
@@ -43,6 +43,6 @@ class InterfacesTest extends TestCase
 
         VarDumperHandler::disable();
 
-        $this->assertEquals(Interfaces::MESSAGE, VarDumperHandler::value());
+        $this->assertSame(Interfaces::MESSAGE_BOTH, VarDumperHandler::value());
     }
 }

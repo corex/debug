@@ -9,7 +9,8 @@ use ReflectionException;
 
 abstract class BaseObject extends BaseValue
 {
-    public const MESSAGE = 'Value is neither an object nor a class.';
+    public const MESSAGE_OBJECT = 'Value is not an object.';
+    public const MESSAGE_BOTH = 'Value is neither an object nor a class.';
 
     /**
      * Get class.
@@ -27,7 +28,7 @@ abstract class BaseObject extends BaseValue
 
         // Show message if class does not exists.
         if (!class_exists($objectOrClass)) {
-            dump(self::MESSAGE);
+            dump(self::MESSAGE_BOTH);
             $objectOrClass = null;
         }
 
