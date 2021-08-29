@@ -75,58 +75,6 @@ class FunctionsTest extends TestCase
     }
 
     /**
-     * Test dse().
-     */
-    public function testDSE(): void
-    {
-        Dump::disableRemoteServerHandler();
-        $this->assertFalse(Dump::isRemoteServerHandlerEnabled());
-        dse();
-        $this->assertTrue(Dump::isRemoteServerHandlerEnabled());
-        Dump::disableRemoteServerHandler();
-    }
-
-    /**
-     * Test dsd().
-     */
-    public function testDSD(): void
-    {
-        Dump::enableRemoteServerHandler();
-        $this->assertTrue(Dump::isRemoteServerHandlerEnabled());
-        dsd();
-        $this->assertFalse(Dump::isRemoteServerHandlerEnabled());
-        Dump::disableRemoteServerHandler();
-    }
-
-    /**
-     * Test ds().
-     */
-    public function testDS(): void
-    {
-        Dump::disableRemoteServerHandler();
-        $this->assertFalse(Dump::isRemoteServerHandlerEnabled());
-
-        ds('test');
-
-        $this->assertTrue(Dump::isRemoteServerHandlerEnabled());
-        Dump::disableRemoteServerHandler();
-    }
-
-    /**
-     * Test dsv().
-     */
-    public function testDSV(): void
-    {
-        Dump::disableRemoteServerHandler();
-        $this->assertFalse(Dump::isRemoteServerHandlerEnabled());
-
-        dsv('test')->value();
-
-        $this->assertTrue(Dump::isRemoteServerHandlerEnabled());
-        Dump::disableRemoteServerHandler();
-    }
-
-    /**
      * Get user defined functions.
      *
      * @return string[]

@@ -27,7 +27,7 @@ abstract class BaseObject extends BaseValue
         }
 
         // Show message if class does not exists.
-        if (!class_exists($objectOrClass)) {
+        if (is_array($objectOrClass) || !class_exists((string)$objectOrClass)) {
             dump(self::MESSAGE_BOTH);
             $objectOrClass = null;
         }

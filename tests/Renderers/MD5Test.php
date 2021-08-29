@@ -25,4 +25,18 @@ class MD5Test extends TestCase
         VarDumperHandler::disable();
         $this->assertSame(md5($randomString), VarDumperHandler::value());
     }
+
+    /**
+     * Test display with an array.
+     */
+    public function testDisplayArray(): void
+    {
+        VarDumperHandler::enable();
+
+        $value = new MD5([], 'test');
+        $value->display();
+
+        VarDumperHandler::disable();
+        $this->assertSame(MD5::MESSAGE, VarDumperHandler::value());
+    }
 }

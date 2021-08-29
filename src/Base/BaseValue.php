@@ -12,20 +12,19 @@ abstract class BaseValue implements ValueInterface
     /** @var mixed|null */
     protected $value;
 
-    /** @var string|null */
-    private $function;
+    private ?string $function;
 
     /** @var string[] */
-    private $uses;
+    private array $uses;
 
     /** @var mixed[] */
-    private $parameters;
+    private array $parameters;
 
     /**
      * Value base.
      *
      * @param mixed $value Default null.
-     * @param string $function Default null.
+     * @param string|null $function Default null.
      * @param string[] $uses
      * @param mixed[] $parameters
      */

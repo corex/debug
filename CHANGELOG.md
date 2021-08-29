@@ -1,5 +1,17 @@
 # Changelog
 
+## 3.0.0
+
+### Changed
+- Set php requirement to 7.4 || 8.0
+- Made code more strict.
+
+### Removed
+- Removed dse() function.
+- Removed dsd() function.
+- Removed ds() function.
+- Removed dsv() function.
+
 ## 2.1.0
 
 ### Added

@@ -17,7 +17,7 @@ class VarDumperHandler
     public static function enable(): void
     {
         self::$value = null;
-        VarDumper::setHandler(function ($value): void {
+        VarDumper::setHandler(static function ($value): void {
             self::$value = $value;
         });
     }

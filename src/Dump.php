@@ -14,29 +14,20 @@ use CoRex\Debug\Renderers\MD5;
 use CoRex\Debug\Renderers\Methods;
 use CoRex\Debug\Renderers\ObjectHash;
 use CoRex\Debug\Renderers\Value;
-use Symfony\Component\VarDumper\Cloner\VarCloner;
-use Symfony\Component\VarDumper\Dumper\ServerDumper;
-use Symfony\Component\VarDumper\VarDumper;
 
 class Dump
 {
-    /** @var bool */
-    private static $dumpServerEnabled = false;
-
-    /** @var BaseValue */
-    private $renderer;
+    private BaseValue $renderer;
 
     /** @var mixed */
     private $values;
 
-    /** @var string */
-    private $function;
+    private string $function;
 
     /** @var string[] */
-    private $uses;
+    private array $uses;
 
-    /** @var bool */
-    private static $usesVisible = false;
+    private static bool $usesVisible = false;
 
     /**
      * Parse.
@@ -80,40 +71,6 @@ class Dump
     public static function isCLI(): bool
     {
         return PHP_SAPI === 'cli';
-    }
-
-    /**
-     * Setup remote server handler.
-     */
-    public static function enableRemoteServerHandler(): void
-    {
-        VarDumper::setHandler(function ($var): void {
-            $cloner = new VarCloner();
-            $dumper = new ServerDumper('tcp://' . Constants::HOST_PORT);
-            $dumper->dump($cloner->cloneVar($var));
-        });
-
-        self::$dumpServerEnabled = true;
-    }
-
-    /**
-     * Reset remote server handler.
-     */
-    public static function disableRemoteServerHandler(): void
-    {
-        VarDumper::setHandler(null);
-
-        self::$dumpServerEnabled = false;
-    }
-
-    /**
-     * Is remote server handler enabled.
-     *
-     * @return bool
-     */
-    public static function isRemoteServerHandlerEnabled(): bool
-    {
-        return self::$dumpServerEnabled;
     }
 
     /**
@@ -172,9 +129,12 @@ class Dump
      */
     public function methods(bool $flattened = true): self
     {
-        $this->execute(Methods::class, [
-            'flattened' => $flattened
-        ]);
+        $this->execute(
+            Methods::class,
+            [
+                'flattened' => $flattened
+            ]
+        );
 
         return $this;
     }

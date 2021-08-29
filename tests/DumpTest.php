@@ -7,7 +7,6 @@ namespace Tests\CoRex\Debug;
 use CoRex\Debug\Dump;
 use CoRex\Debug\Renderers\Json;
 use PHPUnit\Framework\TestCase;
-use Symfony\Component\VarDumper\VarDumper;
 use Tests\CoRex\Debug\HelperClasses\TestA;
 use Tests\CoRex\Debug\HelperClasses\TestD;
 
@@ -19,35 +18,6 @@ class DumpTest extends TestCase
     public function testIsCLI(): void
     {
         $this->assertTrue(Dump::isCLI());
-    }
-
-    /**
-     * Test enableRemoteServerHandler().
-     */
-    public function testEnableRemoteServerHandler(): void
-    {
-        Dump::disableRemoteServerHandler();
-        $this->assertFalse(Dump::isRemoteServerHandlerEnabled());
-
-        Dump::enableRemoteServerHandler();
-        $this->assertTrue(Dump::isRemoteServerHandlerEnabled());
-
-        ds('testing');
-
-        // Reset VarDumper handler to null.
-        VarDumper::setHandler(null);
-    }
-
-    /**
-     * Test isableRemoteServerHandler().
-     */
-    public function testDisableRemoteServerHandler(): void
-    {
-        Dump::enableRemoteServerHandler();
-        $this->assertTrue(Dump::isRemoteServerHandlerEnabled());
-
-        Dump::disableRemoteServerHandler();
-        $this->assertFalse(Dump::isRemoteServerHandlerEnabled());
     }
 
     /**

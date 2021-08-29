@@ -4,6 +4,7 @@ declare(strict_types=1);
 
 namespace Tests\CoRex\Debug\HelperClasses;
 
+// @codingStandardsIgnoreFile
 class TestC extends TestB implements TestCInterface
 {
     public const CONST_C_PUBLIC = 'const.c.public';
