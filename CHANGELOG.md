@@ -4,7 +4,6 @@
 
 ### Added
 - Added support for Symfony ^6.0.
-- Added php 8.1 for testing package.
 
 ## 3.0.0
 
